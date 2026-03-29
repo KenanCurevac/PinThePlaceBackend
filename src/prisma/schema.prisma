@@ -1,0 +1,44 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "./generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Question {
+  id          String    @id @default(cuid())
+  question    String
+  answer      String
+  lat         Float
+  lng         Float
+  guesses     Guess[]
+}
+
+model Game {
+  id          String    @id @default(cuid())
+  createdAt   DateTime  @default(now())
+  guesses     Guess[]
+}
+
+model Guess {
+  id          String    @id @default(cuid())
+  lat         Float
+  lng         Float 
+  distance    Float
+  points      Int
+
+  gameId      String
+  questionId  String
+
+  game Game @relation(fields: [gameId], references: [id], onDelete: Cascade) 
+  question Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([gameId, questionId])
+}
