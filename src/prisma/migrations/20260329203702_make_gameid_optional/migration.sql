@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Guess" ALTER COLUMN "gameId" DROP NOT NULL;
