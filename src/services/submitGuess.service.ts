@@ -1,6 +1,7 @@
 import { prisma } from "../lib/prisma.js";
 import { getDistance } from "../lib/calculateDistance.js";
 import { getPoints } from "../lib/calculatePoints.js";
+import { AppError } from "../errors/AppError.js";
 
 type CalculateGuessProps = {
   gameId: string;
@@ -9,18 +10,18 @@ type CalculateGuessProps = {
   guessLng: number;
 };
 
-export const calculateGuess = async ({
+export default async function calculateGuess({
   gameId,
   questionId,
   guessLat,
   guessLng,
-}: CalculateGuessProps) => {
+}: CalculateGuessProps) {
   const question = await prisma.question.findUnique({
     where: { id: questionId },
   });
 
   if (!question) {
-    throw new Error("Question not found");
+    throw new AppError("Game not found", 404);
   }
 
   const distance = getDistance(question.lat, question.lng, guessLat, guessLng);
@@ -42,4 +43,4 @@ export const calculateGuess = async ({
     distance,
     points,
   };
-};
+}

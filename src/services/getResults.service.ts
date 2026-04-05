@@ -1,5 +1,6 @@
 import { prisma } from "../lib/prisma.js";
 import mapGameData from "../lib/mapData.js";
+import { AppError } from "../errors/AppError.js";
 
 export default async function getGameResults(id: string) {
   const game = await prisma.game.findUnique({
@@ -14,7 +15,7 @@ export default async function getGameResults(id: string) {
   });
 
   if (!game) {
-    throw new Error("Game not found");
+    throw new AppError("Game not found", 404);
   }
 
   const formattedResults = mapGameData(game);

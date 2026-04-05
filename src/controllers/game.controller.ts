@@ -1,6 +1,6 @@
 import { prisma } from "../lib/prisma.js";
 import type { Request, Response } from "express";
-import { calculateGuess } from "../services/submitGuess.service.js";
+import calculateGuess from "../services/submitGuess.service.js";
 import getGameResults from "../services/getResults.service.js";
 
 export const createGame = async (req: Request, res: Response) => {
@@ -8,24 +8,16 @@ export const createGame = async (req: Request, res: Response) => {
     data: {},
   });
 
-  return res.status(201).json({ gameId: game.id });
-};
-
-export const selectedQuestions = async (req: Request, res: Response) => {
-  const questionObject = await prisma.$queryRaw`
+  const questions = await prisma.$queryRaw`
   SELECT id, question FROM "Question"
   ORDER BY RANDOM()
   LIMIT 10`;
 
-  return res.status(200).json(questionObject);
+  return res.status(201).json({ gameId: game.id, questions });
 };
 
 export const submitGuess = async (req: Request, res: Response) => {
-  const gameId = String(req.body.gameId);
-  const questionId = String(req.body.questionId);
-  const guessLat = Number(req.body.guessLat);
-  const guessLng = Number(req.body.guessLng);
-
+  const { gameId, questionId, guessLat, guessLng } = req.body;
   const { correctAnswer, distance, points } = await calculateGuess({
     gameId,
     questionId,
