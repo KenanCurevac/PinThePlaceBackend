@@ -8,7 +8,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://pin-the-place-kenan.vercel.app/",
+    origin: true,
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
