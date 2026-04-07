@@ -6,6 +6,13 @@ import cors from "cors";
 
 const app = express();
 
+app.get("/", (req, res) => {
+  res.json({
+    message: "Pin the Place Backend is LIVE on Vercel!",
+    status: "ok",
+  });
+});
+
 app.use(
   cors({
     origin: true,
@@ -17,13 +24,6 @@ app.use(
 
 app.use(express.json());
 app.use("/api", router);
-
-app.get("/", (req, res) => {
-  res.json({
-    message: "Pin the Place Backend is LIVE on Vercel!",
-    status: "ok",
-  });
-});
 
 app.use(errorHandler);
 
