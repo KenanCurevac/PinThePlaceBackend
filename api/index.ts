@@ -18,13 +18,13 @@ app.use(
 app.use(express.json());
 app.use("/api", router);
 
-app.use(errorHandler);
-
-if (process.env.NODE_ENV !== "production") {
-  const PORT = process.env.PORT || 3000;
-  app.listen(PORT, () => {
-    console.log(`Server running locally on http://localhost:${PORT}`);
+app.get("/", (req, res) => {
+  res.json({
+    message: "Pin the Place Backend is LIVE on Vercel!",
+    status: "ok",
   });
-}
+});
+
+app.use(errorHandler);
 
 export default app;
