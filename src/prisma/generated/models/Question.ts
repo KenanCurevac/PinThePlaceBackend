@@ -220,6 +220,7 @@ export type QuestionWhereInput = {
   answer?: Prisma.StringFilter<"Question"> | string
   lat?: Prisma.FloatFilter<"Question"> | number
   lng?: Prisma.FloatFilter<"Question"> | number
+  gameQuestions?: Prisma.GameQuestionListRelationFilter
   guesses?: Prisma.GuessListRelationFilter
 }
 
@@ -229,6 +230,7 @@ export type QuestionOrderByWithRelationInput = {
   answer?: Prisma.SortOrder
   lat?: Prisma.SortOrder
   lng?: Prisma.SortOrder
+  gameQuestions?: Prisma.GameQuestionOrderByRelationAggregateInput
   guesses?: Prisma.GuessOrderByRelationAggregateInput
 }
 
@@ -241,6 +243,7 @@ export type QuestionWhereUniqueInput = Prisma.AtLeast<{
   answer?: Prisma.StringFilter<"Question"> | string
   lat?: Prisma.FloatFilter<"Question"> | number
   lng?: Prisma.FloatFilter<"Question"> | number
+  gameQuestions?: Prisma.GameQuestionListRelationFilter
   guesses?: Prisma.GuessListRelationFilter
 }, "id">
 
@@ -274,6 +277,7 @@ export type QuestionCreateInput = {
   answer: string
   lat: number
   lng: number
+  gameQuestions?: Prisma.GameQuestionCreateNestedManyWithoutQuestionInput
   guesses?: Prisma.GuessCreateNestedManyWithoutQuestionInput
 }
 
@@ -283,6 +287,7 @@ export type QuestionUncheckedCreateInput = {
   answer: string
   lat: number
   lng: number
+  gameQuestions?: Prisma.GameQuestionUncheckedCreateNestedManyWithoutQuestionInput
   guesses?: Prisma.GuessUncheckedCreateNestedManyWithoutQuestionInput
 }
 
@@ -292,6 +297,7 @@ export type QuestionUpdateInput = {
   answer?: Prisma.StringFieldUpdateOperationsInput | string
   lat?: Prisma.FloatFieldUpdateOperationsInput | number
   lng?: Prisma.FloatFieldUpdateOperationsInput | number
+  gameQuestions?: Prisma.GameQuestionUpdateManyWithoutQuestionNestedInput
   guesses?: Prisma.GuessUpdateManyWithoutQuestionNestedInput
 }
 
@@ -301,6 +307,7 @@ export type QuestionUncheckedUpdateInput = {
   answer?: Prisma.StringFieldUpdateOperationsInput | string
   lat?: Prisma.FloatFieldUpdateOperationsInput | number
   lng?: Prisma.FloatFieldUpdateOperationsInput | number
+  gameQuestions?: Prisma.GameQuestionUncheckedUpdateManyWithoutQuestionNestedInput
   guesses?: Prisma.GuessUncheckedUpdateManyWithoutQuestionNestedInput
 }
 
@@ -379,6 +386,20 @@ export type FloatFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type QuestionCreateNestedOneWithoutGameQuestionsInput = {
+  create?: Prisma.XOR<Prisma.QuestionCreateWithoutGameQuestionsInput, Prisma.QuestionUncheckedCreateWithoutGameQuestionsInput>
+  connectOrCreate?: Prisma.QuestionCreateOrConnectWithoutGameQuestionsInput
+  connect?: Prisma.QuestionWhereUniqueInput
+}
+
+export type QuestionUpdateOneRequiredWithoutGameQuestionsNestedInput = {
+  create?: Prisma.XOR<Prisma.QuestionCreateWithoutGameQuestionsInput, Prisma.QuestionUncheckedCreateWithoutGameQuestionsInput>
+  connectOrCreate?: Prisma.QuestionCreateOrConnectWithoutGameQuestionsInput
+  upsert?: Prisma.QuestionUpsertWithoutGameQuestionsInput
+  connect?: Prisma.QuestionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.QuestionUpdateToOneWithWhereWithoutGameQuestionsInput, Prisma.QuestionUpdateWithoutGameQuestionsInput>, Prisma.QuestionUncheckedUpdateWithoutGameQuestionsInput>
+}
+
 export type QuestionCreateNestedOneWithoutGuessesInput = {
   create?: Prisma.XOR<Prisma.QuestionCreateWithoutGuessesInput, Prisma.QuestionUncheckedCreateWithoutGuessesInput>
   connectOrCreate?: Prisma.QuestionCreateOrConnectWithoutGuessesInput
@@ -393,12 +414,65 @@ export type QuestionUpdateOneRequiredWithoutGuessesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.QuestionUpdateToOneWithWhereWithoutGuessesInput, Prisma.QuestionUpdateWithoutGuessesInput>, Prisma.QuestionUncheckedUpdateWithoutGuessesInput>
 }
 
+export type QuestionCreateWithoutGameQuestionsInput = {
+  id?: string
+  question: string
+  answer: string
+  lat: number
+  lng: number
+  guesses?: Prisma.GuessCreateNestedManyWithoutQuestionInput
+}
+
+export type QuestionUncheckedCreateWithoutGameQuestionsInput = {
+  id?: string
+  question: string
+  answer: string
+  lat: number
+  lng: number
+  guesses?: Prisma.GuessUncheckedCreateNestedManyWithoutQuestionInput
+}
+
+export type QuestionCreateOrConnectWithoutGameQuestionsInput = {
+  where: Prisma.QuestionWhereUniqueInput
+  create: Prisma.XOR<Prisma.QuestionCreateWithoutGameQuestionsInput, Prisma.QuestionUncheckedCreateWithoutGameQuestionsInput>
+}
+
+export type QuestionUpsertWithoutGameQuestionsInput = {
+  update: Prisma.XOR<Prisma.QuestionUpdateWithoutGameQuestionsInput, Prisma.QuestionUncheckedUpdateWithoutGameQuestionsInput>
+  create: Prisma.XOR<Prisma.QuestionCreateWithoutGameQuestionsInput, Prisma.QuestionUncheckedCreateWithoutGameQuestionsInput>
+  where?: Prisma.QuestionWhereInput
+}
+
+export type QuestionUpdateToOneWithWhereWithoutGameQuestionsInput = {
+  where?: Prisma.QuestionWhereInput
+  data: Prisma.XOR<Prisma.QuestionUpdateWithoutGameQuestionsInput, Prisma.QuestionUncheckedUpdateWithoutGameQuestionsInput>
+}
+
+export type QuestionUpdateWithoutGameQuestionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  question?: Prisma.StringFieldUpdateOperationsInput | string
+  answer?: Prisma.StringFieldUpdateOperationsInput | string
+  lat?: Prisma.FloatFieldUpdateOperationsInput | number
+  lng?: Prisma.FloatFieldUpdateOperationsInput | number
+  guesses?: Prisma.GuessUpdateManyWithoutQuestionNestedInput
+}
+
+export type QuestionUncheckedUpdateWithoutGameQuestionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  question?: Prisma.StringFieldUpdateOperationsInput | string
+  answer?: Prisma.StringFieldUpdateOperationsInput | string
+  lat?: Prisma.FloatFieldUpdateOperationsInput | number
+  lng?: Prisma.FloatFieldUpdateOperationsInput | number
+  guesses?: Prisma.GuessUncheckedUpdateManyWithoutQuestionNestedInput
+}
+
 export type QuestionCreateWithoutGuessesInput = {
   id?: string
   question: string
   answer: string
   lat: number
   lng: number
+  gameQuestions?: Prisma.GameQuestionCreateNestedManyWithoutQuestionInput
 }
 
 export type QuestionUncheckedCreateWithoutGuessesInput = {
@@ -407,6 +481,7 @@ export type QuestionUncheckedCreateWithoutGuessesInput = {
   answer: string
   lat: number
   lng: number
+  gameQuestions?: Prisma.GameQuestionUncheckedCreateNestedManyWithoutQuestionInput
 }
 
 export type QuestionCreateOrConnectWithoutGuessesInput = {
@@ -431,6 +506,7 @@ export type QuestionUpdateWithoutGuessesInput = {
   answer?: Prisma.StringFieldUpdateOperationsInput | string
   lat?: Prisma.FloatFieldUpdateOperationsInput | number
   lng?: Prisma.FloatFieldUpdateOperationsInput | number
+  gameQuestions?: Prisma.GameQuestionUpdateManyWithoutQuestionNestedInput
 }
 
 export type QuestionUncheckedUpdateWithoutGuessesInput = {
@@ -439,6 +515,7 @@ export type QuestionUncheckedUpdateWithoutGuessesInput = {
   answer?: Prisma.StringFieldUpdateOperationsInput | string
   lat?: Prisma.FloatFieldUpdateOperationsInput | number
   lng?: Prisma.FloatFieldUpdateOperationsInput | number
+  gameQuestions?: Prisma.GameQuestionUncheckedUpdateManyWithoutQuestionNestedInput
 }
 
 
@@ -447,10 +524,12 @@ export type QuestionUncheckedUpdateWithoutGuessesInput = {
  */
 
 export type QuestionCountOutputType = {
+  gameQuestions: number
   guesses: number
 }
 
 export type QuestionCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  gameQuestions?: boolean | QuestionCountOutputTypeCountGameQuestionsArgs
   guesses?: boolean | QuestionCountOutputTypeCountGuessesArgs
 }
 
@@ -467,6 +546,13 @@ export type QuestionCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Ext
 /**
  * QuestionCountOutputType without action
  */
+export type QuestionCountOutputTypeCountGameQuestionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GameQuestionWhereInput
+}
+
+/**
+ * QuestionCountOutputType without action
+ */
 export type QuestionCountOutputTypeCountGuessesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.GuessWhereInput
 }
@@ -478,6 +564,7 @@ export type QuestionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   answer?: boolean
   lat?: boolean
   lng?: boolean
+  gameQuestions?: boolean | Prisma.Question$gameQuestionsArgs<ExtArgs>
   guesses?: boolean | Prisma.Question$guessesArgs<ExtArgs>
   _count?: boolean | Prisma.QuestionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["question"]>
@@ -508,6 +595,7 @@ export type QuestionSelectScalar = {
 
 export type QuestionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "question" | "answer" | "lat" | "lng", ExtArgs["result"]["question"]>
 export type QuestionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  gameQuestions?: boolean | Prisma.Question$gameQuestionsArgs<ExtArgs>
   guesses?: boolean | Prisma.Question$guessesArgs<ExtArgs>
   _count?: boolean | Prisma.QuestionCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -517,6 +605,7 @@ export type QuestionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
 export type $QuestionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Question"
   objects: {
+    gameQuestions: Prisma.$GameQuestionPayload<ExtArgs>[]
     guesses: Prisma.$GuessPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -919,6 +1008,7 @@ readonly fields: QuestionFieldRefs;
  */
 export interface Prisma__QuestionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  gameQuestions<T extends Prisma.Question$gameQuestionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Question$gameQuestionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GameQuestionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   guesses<T extends Prisma.Question$guessesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Question$guessesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GuessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1344,6 +1434,30 @@ export type QuestionDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Limit how many Questions to delete.
    */
   limit?: number
+}
+
+/**
+ * Question.gameQuestions
+ */
+export type Question$gameQuestionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the GameQuestion
+   */
+  select?: Prisma.GameQuestionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the GameQuestion
+   */
+  omit?: Prisma.GameQuestionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GameQuestionInclude<ExtArgs> | null
+  where?: Prisma.GameQuestionWhereInput
+  orderBy?: Prisma.GameQuestionOrderByWithRelationInput | Prisma.GameQuestionOrderByWithRelationInput[]
+  cursor?: Prisma.GameQuestionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GameQuestionScalarFieldEnum | Prisma.GameQuestionScalarFieldEnum[]
 }
 
 /**

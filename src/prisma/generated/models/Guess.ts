@@ -515,14 +515,6 @@ export type GuessUncheckedUpdateManyWithoutGameNestedInput = {
   deleteMany?: Prisma.GuessScalarWhereInput | Prisma.GuessScalarWhereInput[]
 }
 
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type GuessCreateWithoutQuestionInput = {
   id?: string
   lat: number

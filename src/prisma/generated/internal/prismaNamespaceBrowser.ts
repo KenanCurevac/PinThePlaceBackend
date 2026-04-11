@@ -53,6 +53,7 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   Question: 'Question',
   Game: 'Game',
+  GameQuestion: 'GameQuestion',
   Guess: 'Guess'
 } as const
 
@@ -89,6 +90,16 @@ export const GameScalarFieldEnum = {
 } as const
 
 export type GameScalarFieldEnum = (typeof GameScalarFieldEnum)[keyof typeof GameScalarFieldEnum]
+
+
+export const GameQuestionScalarFieldEnum = {
+  id: 'id',
+  gameId: 'gameId',
+  questionId: 'questionId',
+  order: 'order'
+} as const
+
+export type GameQuestionScalarFieldEnum = (typeof GameQuestionScalarFieldEnum)[keyof typeof GameQuestionScalarFieldEnum]
 
 
 export const GuessScalarFieldEnum = {

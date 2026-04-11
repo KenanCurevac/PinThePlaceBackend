@@ -28,6 +28,11 @@ export type Question = Prisma.QuestionModel
  */
 export type Game = Prisma.GameModel
 /**
+ * Model GameQuestion
+ * 
+ */
+export type GameQuestion = Prisma.GameQuestionModel
+/**
  * Model Guess
  * 
  */

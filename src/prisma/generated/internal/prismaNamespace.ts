@@ -386,6 +386,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   Question: 'Question',
   Game: 'Game',
+  GameQuestion: 'GameQuestion',
   Guess: 'Guess'
 } as const
 
@@ -402,7 +403,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "question" | "game" | "guess"
+    modelProps: "question" | "game" | "gameQuestion" | "guess"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -554,6 +555,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    GameQuestion: {
+      payload: Prisma.$GameQuestionPayload<ExtArgs>
+      fields: Prisma.GameQuestionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.GameQuestionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameQuestionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.GameQuestionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameQuestionPayload>
+        }
+        findFirst: {
+          args: Prisma.GameQuestionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameQuestionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.GameQuestionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameQuestionPayload>
+        }
+        findMany: {
+          args: Prisma.GameQuestionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameQuestionPayload>[]
+        }
+        create: {
+          args: Prisma.GameQuestionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameQuestionPayload>
+        }
+        createMany: {
+          args: Prisma.GameQuestionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.GameQuestionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameQuestionPayload>[]
+        }
+        delete: {
+          args: Prisma.GameQuestionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameQuestionPayload>
+        }
+        update: {
+          args: Prisma.GameQuestionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameQuestionPayload>
+        }
+        deleteMany: {
+          args: Prisma.GameQuestionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.GameQuestionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.GameQuestionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameQuestionPayload>[]
+        }
+        upsert: {
+          args: Prisma.GameQuestionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameQuestionPayload>
+        }
+        aggregate: {
+          args: Prisma.GameQuestionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateGameQuestion>
+        }
+        groupBy: {
+          args: Prisma.GameQuestionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GameQuestionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.GameQuestionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GameQuestionCountAggregateOutputType> | number
+        }
+      }
+    }
     Guess: {
       payload: Prisma.$GuessPayload<ExtArgs>
       fields: Prisma.GuessFieldRefs
@@ -684,6 +759,16 @@ export const GameScalarFieldEnum = {
 } as const
 
 export type GameScalarFieldEnum = (typeof GameScalarFieldEnum)[keyof typeof GameScalarFieldEnum]
+
+
+export const GameQuestionScalarFieldEnum = {
+  id: 'id',
+  gameId: 'gameId',
+  questionId: 'questionId',
+  order: 'order'
+} as const
+
+export type GameQuestionScalarFieldEnum = (typeof GameQuestionScalarFieldEnum)[keyof typeof GameQuestionScalarFieldEnum]
 
 
 export const GuessScalarFieldEnum = {
@@ -873,6 +958,7 @@ export type PrismaClientOptions = ({
 export type GlobalOmitConfig = {
   question?: Prisma.QuestionOmit
   game?: Prisma.GameOmit
+  gameQuestion?: Prisma.GameQuestionOmit
   guess?: Prisma.GuessOmit
 }
 

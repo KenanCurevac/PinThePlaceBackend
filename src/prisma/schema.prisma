@@ -18,13 +18,29 @@ model Question {
   answer      String
   lat         Float
   lng         Float
+  gameQuestions GameQuestion[]
   guesses     Guess[]
 }
 
 model Game {
   id          String    @id @default(cuid())
   createdAt   DateTime  @default(now())
+  gameQuestions GameQuestion[]
   guesses     Guess[]
+}
+
+model GameQuestion {
+  id         String   @id @default(cuid())
+
+  gameId     String
+  questionId String
+
+  order      Int
+
+  game       Game @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([gameId, questionId])
 }
 
 model Guess {
