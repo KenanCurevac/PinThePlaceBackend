@@ -3,7 +3,8 @@ import {
   submitGuess,
   createGame,
   getResults,
-  getGameQuestions,
+  getQuestions,
+  getState,
 } from "../controllers/game.controller.js";
 import { validate } from "../middlewares/validate.js";
 import { submitGuessSchema } from "../validation/submitGuess.schema.js";
@@ -16,13 +17,18 @@ router.post("/game", asyncHandler(createGame));
 router.get(
   "/game/:gameId/questions",
   validate(gameIdParamSchema, "params"),
-  getGameQuestions,
+  getQuestions,
 );
 router.post(
   "/game/:gameId/guesses",
   validate(gameIdParamSchema, "params"),
   validate(submitGuessSchema, "body"),
   asyncHandler(submitGuess),
+);
+router.get(
+  "/game/:gameId/state",
+  validate(gameIdParamSchema, "params"),
+  asyncHandler(getState),
 );
 router.get(
   "/game/:gameId/results",

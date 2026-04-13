@@ -2,6 +2,7 @@ import { prisma } from "../lib/prisma.js";
 import type { Request, Response } from "express";
 import calculateGuess from "../services/submitGuess.service.js";
 import getGameResults from "../services/getResults.service.js";
+import getGameState from "../services/getState.service.js";
 
 export const createGame = async (req: Request, res: Response) => {
   const game = await prisma.game.create({
@@ -25,7 +26,7 @@ export const createGame = async (req: Request, res: Response) => {
   return res.status(201).json({ gameId: game.id });
 };
 
-export const getGameQuestions = async (req: Request, res: Response) => {
+export const getQuestions = async (req: Request, res: Response) => {
   const gameId = req.params.id as string;
 
   const gameQuestions = await prisma.gameQuestion.findMany({
@@ -62,6 +63,14 @@ export const submitGuess = async (req: Request, res: Response) => {
     distance,
     points,
   });
+};
+
+export const getState = async (req: Request, res: Response) => {
+  const gameId = req.params.gameId as string;
+
+  const data = await getGameState(gameId);
+
+  res.json(data);
 };
 
 export const getResults = async (req: Request, res: Response) => {
