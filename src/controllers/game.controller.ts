@@ -26,51 +26,26 @@ export const createGame = async (req: Request, res: Response) => {
   return res.status(201).json({ gameId: game.id });
 };
 
-export const getQuestions = async (req: Request, res: Response) => {
-  const gameId = req.params.id as string;
-
-  const gameQuestions = await prisma.gameQuestion.findMany({
-    where: { gameId },
-    include: {
-      question: true,
-    },
-    orderBy: {
-      order: "asc",
-    },
-  });
-
-  return res.json({
-    questions: gameQuestions.map((gq) => ({
-      id: gq.question.id,
-      question: gq.question.question,
-    })),
-  });
-};
-
-export const submitGuess = async (req: Request, res: Response) => {
-  const gameId = req.params.gameId as string;
-
-  const { questionId, guessLat, guessLng } = req.body;
-  const { correctAnswer, distance, points } = await calculateGuess({
-    gameId,
-    questionId,
-    guessLat,
-    guessLng,
-  });
-
-  return res.status(201).json({
-    correctAnswer,
-    distance,
-    points,
-  });
-};
-
 export const getState = async (req: Request, res: Response) => {
   const gameId = req.params.gameId as string;
 
   const data = await getGameState(gameId);
 
   res.json(data);
+};
+
+export const submitGuess = async (req: Request, res: Response) => {
+  const gameId = req.params.gameId as string;
+  const { questionId, guessLat, guessLng } = req.body;
+
+  await calculateGuess({
+    gameId,
+    questionId,
+    guessLat,
+    guessLng,
+  });
+
+  return res.status(201).json({ success: true });
 };
 
 export const getResults = async (req: Request, res: Response) => {

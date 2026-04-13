@@ -3,7 +3,6 @@ import {
   submitGuess,
   createGame,
   getResults,
-  getQuestions,
   getState,
 } from "../controllers/game.controller.js";
 import { validate } from "../middlewares/validate.js";
@@ -15,20 +14,15 @@ const router = Router();
 
 router.post("/game", asyncHandler(createGame));
 router.get(
-  "/game/:gameId/questions",
+  "/game/:gameId/state",
   validate(gameIdParamSchema, "params"),
-  getQuestions,
+  asyncHandler(getState),
 );
 router.post(
   "/game/:gameId/guesses",
   validate(gameIdParamSchema, "params"),
   validate(submitGuessSchema, "body"),
   asyncHandler(submitGuess),
-);
-router.get(
-  "/game/:gameId/state",
-  validate(gameIdParamSchema, "params"),
-  asyncHandler(getState),
 );
 router.get(
   "/game/:gameId/results",

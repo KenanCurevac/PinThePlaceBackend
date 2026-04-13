@@ -30,8 +30,11 @@ export default async function getGameState(id: string) {
 
   const questions = mapGameState(game as GameWithRelations);
 
+  const totalPoints = game.guesses.reduce((sum, g) => sum + g.points, 0);
+
   return {
     gameId: game.id,
     questions,
+    totalPoints,
   };
 }
