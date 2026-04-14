@@ -20,6 +20,7 @@ export default function mapGameState(game: GameWithRelations) {
     return {
       ...question,
       correct: {
+        answer: gq.question.answer,
         lat: gq.question.lat,
         lng: gq.question.lng,
       },
