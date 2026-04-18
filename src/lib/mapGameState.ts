@@ -7,6 +7,7 @@ export default function mapGameState(game: GameWithRelations) {
     const question = {
       questionId: gq.questionId,
       question: gq.question.question,
+      startedAt: gq.startedAt,
     };
 
     if (!guess) {

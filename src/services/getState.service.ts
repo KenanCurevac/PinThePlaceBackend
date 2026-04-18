@@ -28,12 +28,35 @@ export default async function getGameState(id: string) {
     throw new AppError("Game not found", 404);
   }
 
+  const currentQuestionIndex = game.gameQuestions.findIndex(
+    (gq) => !game.guesses.some((g) => g.questionId === gq.questionId),
+  );
+
+  const currentQuestion = game.gameQuestions[currentQuestionIndex];
+
+  if (currentQuestion && !currentQuestion.startedAt) {
+    await prisma.gameQuestion.update({
+      where: {
+        gameId_questionId: {
+          gameId: game.id,
+          questionId: currentQuestion.questionId,
+        },
+      },
+      data: {
+        startedAt: new Date(),
+      },
+    });
+
+    return getGameState(id);
+  }
+
   const questions = mapGameState(game as GameWithRelations);
 
   const totalPoints = game.guesses.reduce((sum, g) => sum + g.points, 0);
 
   return {
     gameId: game.id,
+    currentQuestionIndex,
     questions,
     totalPoints,
   };

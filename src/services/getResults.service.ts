@@ -1,16 +1,18 @@
 import { prisma } from "../lib/prisma.js";
-import mapGameData from "../lib/mapData.js";
+import mapGameData from "../lib/mapGameData.js";
 import { AppError } from "../errors/AppError.js";
 
 export default async function getGameResults(id: string) {
   const game = await prisma.game.findUnique({
     where: { id },
     include: {
-      guesses: {
+      gameQuestions: {
         include: {
           question: true,
         },
+        orderBy: { order: "asc" },
       },
+      guesses: true,
     },
   });
 

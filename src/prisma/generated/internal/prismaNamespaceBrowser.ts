@@ -96,7 +96,8 @@ export const GameQuestionScalarFieldEnum = {
   id: 'id',
   gameId: 'gameId',
   questionId: 'questionId',
-  order: 'order'
+  order: 'order',
+  startedAt: 'startedAt'
 } as const
 
 export type GameQuestionScalarFieldEnum = (typeof GameQuestionScalarFieldEnum)[keyof typeof GameQuestionScalarFieldEnum]
@@ -129,4 +130,12 @@ export const QueryMode = {
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
