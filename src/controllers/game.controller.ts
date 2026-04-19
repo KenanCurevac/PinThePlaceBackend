@@ -3,6 +3,7 @@ import type { Request, Response } from "express";
 import calculateGuess from "../services/submitGuess.service.js";
 import getGameResults from "../services/getResults.service.js";
 import getGameState from "../services/getState.service.js";
+import { nextGameQuestion } from "../services/nextQuestion.js";
 
 export const createGame = async (req: Request, res: Response) => {
   const game = await prisma.game.create({
@@ -20,6 +21,7 @@ export const createGame = async (req: Request, res: Response) => {
       gameId: game.id,
       questionId: q.id,
       order: index,
+      startedAt: index === 0 ? new Date() : null,
     })),
   });
 
@@ -46,6 +48,14 @@ export const submitGuess = async (req: Request, res: Response) => {
   });
 
   return res.status(201).json({ success: true });
+};
+
+export const nextQuestion = async (req: Request, res: Response) => {
+  const gameId = req.params.gameId as string;
+
+  const result = await nextGameQuestion(gameId);
+
+  return res.json(result);
 };
 
 export const getResults = async (req: Request, res: Response) => {

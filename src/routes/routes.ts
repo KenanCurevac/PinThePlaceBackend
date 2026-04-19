@@ -4,6 +4,7 @@ import {
   createGame,
   getResults,
   getState,
+  nextQuestion,
 } from "../controllers/game.controller.js";
 import { validate } from "../middlewares/validate.js";
 import { submitGuessSchema } from "../validation/submitGuess.schema.js";
@@ -23,6 +24,11 @@ router.post(
   validate(gameIdParamSchema, "params"),
   validate(submitGuessSchema, "body"),
   asyncHandler(submitGuess),
+);
+router.post(
+  "/game/:gameId/next",
+  validate(gameIdParamSchema, "params"),
+  asyncHandler(nextQuestion),
 );
 router.get(
   "/game/:gameId/results",

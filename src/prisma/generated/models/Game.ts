@@ -20,40 +20,64 @@ export type GameModel = runtime.Types.Result.DefaultSelection<Prisma.$GamePayloa
 
 export type AggregateGame = {
   _count: GameCountAggregateOutputType | null
+  _avg: GameAvgAggregateOutputType | null
+  _sum: GameSumAggregateOutputType | null
   _min: GameMinAggregateOutputType | null
   _max: GameMaxAggregateOutputType | null
+}
+
+export type GameAvgAggregateOutputType = {
+  currentQuestionIndex: number | null
+}
+
+export type GameSumAggregateOutputType = {
+  currentQuestionIndex: number | null
 }
 
 export type GameMinAggregateOutputType = {
   id: string | null
   createdAt: Date | null
+  currentQuestionIndex: number | null
 }
 
 export type GameMaxAggregateOutputType = {
   id: string | null
   createdAt: Date | null
+  currentQuestionIndex: number | null
 }
 
 export type GameCountAggregateOutputType = {
   id: number
   createdAt: number
+  currentQuestionIndex: number
   _all: number
 }
 
 
+export type GameAvgAggregateInputType = {
+  currentQuestionIndex?: true
+}
+
+export type GameSumAggregateInputType = {
+  currentQuestionIndex?: true
+}
+
 export type GameMinAggregateInputType = {
   id?: true
   createdAt?: true
+  currentQuestionIndex?: true
 }
 
 export type GameMaxAggregateInputType = {
   id?: true
   createdAt?: true
+  currentQuestionIndex?: true
 }
 
 export type GameCountAggregateInputType = {
   id?: true
   createdAt?: true
+  currentQuestionIndex?: true
   _all?: true
 }
 
@@ -95,6 +119,18 @@ export type GameAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: GameAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: GameSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: GameMinAggregateInputType
@@ -125,6 +161,8 @@ export type GameGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   _count?: GameCountAggregateInputType | true
+  _avg?: GameAvgAggregateInputType
+  _sum?: GameSumAggregateInputType
   _min?: GameMinAggregateInputType
   _max?: GameMaxAggregateInputType
 }
@@ -132,7 +170,10 @@ export type GameGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type GameGroupByOutputType = {
   id: string
   createdAt: Date
+  currentQuestionIndex: number
   _count: GameCountAggregateOutputType | null
+  _avg: GameAvgAggregateOutputType | null
+  _sum: GameSumAggregateOutputType | null
   _min: GameMinAggregateOutputType | null
   _max: GameMaxAggregateOutputType | null
 }
@@ -158,6 +199,7 @@ export type GameWhereInput = {
   NOT?: Prisma.GameWhereInput | Prisma.GameWhereInput[]
   id?: Prisma.StringFilter<"Game"> | string
   createdAt?: Prisma.DateTimeFilter<"Game"> | Date | string
+  currentQuestionIndex?: Prisma.IntFilter<"Game"> | number
   gameQuestions?: Prisma.GameQuestionListRelationFilter
   guesses?: Prisma.GuessListRelationFilter
 }
@@ -165,6 +207,7 @@ export type GameWhereInput = {
 export type GameOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  currentQuestionIndex?: Prisma.SortOrder
   gameQuestions?: Prisma.GameQuestionOrderByRelationAggregateInput
   guesses?: Prisma.GuessOrderByRelationAggregateInput
 }
@@ -175,6 +218,7 @@ export type GameWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.GameWhereInput[]
   NOT?: Prisma.GameWhereInput | Prisma.GameWhereInput[]
   createdAt?: Prisma.DateTimeFilter<"Game"> | Date | string
+  currentQuestionIndex?: Prisma.IntFilter<"Game"> | number
   gameQuestions?: Prisma.GameQuestionListRelationFilter
   guesses?: Prisma.GuessListRelationFilter
 }, "id">
@@ -182,9 +226,12 @@ export type GameWhereUniqueInput = Prisma.AtLeast<{
 export type GameOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  currentQuestionIndex?: Prisma.SortOrder
   _count?: Prisma.GameCountOrderByAggregateInput
+  _avg?: Prisma.GameAvgOrderByAggregateInput
   _max?: Prisma.GameMaxOrderByAggregateInput
   _min?: Prisma.GameMinOrderByAggregateInput
+  _sum?: Prisma.GameSumOrderByAggregateInput
 }
 
 export type GameScalarWhereWithAggregatesInput = {
@@ -193,11 +240,13 @@ export type GameScalarWhereWithAggregatesInput = {
   NOT?: Prisma.GameScalarWhereWithAggregatesInput | Prisma.GameScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Game"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Game"> | Date | string
+  currentQuestionIndex?: Prisma.IntWithAggregatesFilter<"Game"> | number
 }
 
 export type GameCreateInput = {
   id?: string
   createdAt?: Date | string
+  currentQuestionIndex?: number
   gameQuestions?: Prisma.GameQuestionCreateNestedManyWithoutGameInput
   guesses?: Prisma.GuessCreateNestedManyWithoutGameInput
 }
@@ -205,6 +254,7 @@ export type GameCreateInput = {
 export type GameUncheckedCreateInput = {
   id?: string
   createdAt?: Date | string
+  currentQuestionIndex?: number
   gameQuestions?: Prisma.GameQuestionUncheckedCreateNestedManyWithoutGameInput
   guesses?: Prisma.GuessUncheckedCreateNestedManyWithoutGameInput
 }
@@ -212,6 +262,7 @@ export type GameUncheckedCreateInput = {
 export type GameUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currentQuestionIndex?: Prisma.IntFieldUpdateOperationsInput | number
   gameQuestions?: Prisma.GameQuestionUpdateManyWithoutGameNestedInput
   guesses?: Prisma.GuessUpdateManyWithoutGameNestedInput
 }
@@ -219,6 +270,7 @@ export type GameUpdateInput = {
 export type GameUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currentQuestionIndex?: Prisma.IntFieldUpdateOperationsInput | number
   gameQuestions?: Prisma.GameQuestionUncheckedUpdateManyWithoutGameNestedInput
   guesses?: Prisma.GuessUncheckedUpdateManyWithoutGameNestedInput
 }
@@ -226,31 +278,45 @@ export type GameUncheckedUpdateInput = {
 export type GameCreateManyInput = {
   id?: string
   createdAt?: Date | string
+  currentQuestionIndex?: number
 }
 
 export type GameUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currentQuestionIndex?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type GameUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currentQuestionIndex?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type GameCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  currentQuestionIndex?: Prisma.SortOrder
+}
+
+export type GameAvgOrderByAggregateInput = {
+  currentQuestionIndex?: Prisma.SortOrder
 }
 
 export type GameMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  currentQuestionIndex?: Prisma.SortOrder
 }
 
 export type GameMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  currentQuestionIndex?: Prisma.SortOrder
+}
+
+export type GameSumOrderByAggregateInput = {
+  currentQuestionIndex?: Prisma.SortOrder
 }
 
 export type GameScalarRelationFilter = {
@@ -260,6 +326,14 @@ export type GameScalarRelationFilter = {
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
+}
+
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
 }
 
 export type GameCreateNestedOneWithoutGameQuestionsInput = {
@@ -293,12 +367,14 @@ export type GameUpdateOneRequiredWithoutGuessesNestedInput = {
 export type GameCreateWithoutGameQuestionsInput = {
   id?: string
   createdAt?: Date | string
+  currentQuestionIndex?: number
   guesses?: Prisma.GuessCreateNestedManyWithoutGameInput
 }
 
 export type GameUncheckedCreateWithoutGameQuestionsInput = {
   id?: string
   createdAt?: Date | string
+  currentQuestionIndex?: number
   guesses?: Prisma.GuessUncheckedCreateNestedManyWithoutGameInput
 }
 
@@ -321,24 +397,28 @@ export type GameUpdateToOneWithWhereWithoutGameQuestionsInput = {
 export type GameUpdateWithoutGameQuestionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currentQuestionIndex?: Prisma.IntFieldUpdateOperationsInput | number
   guesses?: Prisma.GuessUpdateManyWithoutGameNestedInput
 }
 
 export type GameUncheckedUpdateWithoutGameQuestionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currentQuestionIndex?: Prisma.IntFieldUpdateOperationsInput | number
   guesses?: Prisma.GuessUncheckedUpdateManyWithoutGameNestedInput
 }
 
 export type GameCreateWithoutGuessesInput = {
   id?: string
   createdAt?: Date | string
+  currentQuestionIndex?: number
   gameQuestions?: Prisma.GameQuestionCreateNestedManyWithoutGameInput
 }
 
 export type GameUncheckedCreateWithoutGuessesInput = {
   id?: string
   createdAt?: Date | string
+  currentQuestionIndex?: number
   gameQuestions?: Prisma.GameQuestionUncheckedCreateNestedManyWithoutGameInput
 }
 
@@ -361,12 +441,14 @@ export type GameUpdateToOneWithWhereWithoutGuessesInput = {
 export type GameUpdateWithoutGuessesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currentQuestionIndex?: Prisma.IntFieldUpdateOperationsInput | number
   gameQuestions?: Prisma.GameQuestionUpdateManyWithoutGameNestedInput
 }
 
 export type GameUncheckedUpdateWithoutGuessesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currentQuestionIndex?: Prisma.IntFieldUpdateOperationsInput | number
   gameQuestions?: Prisma.GameQuestionUncheckedUpdateManyWithoutGameNestedInput
 }
 
@@ -413,6 +495,7 @@ export type GameCountOutputTypeCountGuessesArgs<ExtArgs extends runtime.Types.Ex
 export type GameSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   createdAt?: boolean
+  currentQuestionIndex?: boolean
   gameQuestions?: boolean | Prisma.Game$gameQuestionsArgs<ExtArgs>
   guesses?: boolean | Prisma.Game$guessesArgs<ExtArgs>
   _count?: boolean | Prisma.GameCountOutputTypeDefaultArgs<ExtArgs>
@@ -421,19 +504,22 @@ export type GameSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
 export type GameSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   createdAt?: boolean
+  currentQuestionIndex?: boolean
 }, ExtArgs["result"]["game"]>
 
 export type GameSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   createdAt?: boolean
+  currentQuestionIndex?: boolean
 }, ExtArgs["result"]["game"]>
 
 export type GameSelectScalar = {
   id?: boolean
   createdAt?: boolean
+  currentQuestionIndex?: boolean
 }
 
-export type GameOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt", ExtArgs["result"]["game"]>
+export type GameOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "currentQuestionIndex", ExtArgs["result"]["game"]>
 export type GameInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   gameQuestions?: boolean | Prisma.Game$gameQuestionsArgs<ExtArgs>
   guesses?: boolean | Prisma.Game$guessesArgs<ExtArgs>
@@ -451,6 +537,7 @@ export type $GamePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     createdAt: Date
+    currentQuestionIndex: number
   }, ExtArgs["result"]["game"]>
   composites: {}
 }
@@ -878,6 +965,7 @@ export interface Prisma__GameClient<T, Null = never, ExtArgs extends runtime.Typ
 export interface GameFieldRefs {
   readonly id: Prisma.FieldRef<"Game", 'String'>
   readonly createdAt: Prisma.FieldRef<"Game", 'DateTime'>
+  readonly currentQuestionIndex: Prisma.FieldRef<"Game", 'Int'>
 }
     
 

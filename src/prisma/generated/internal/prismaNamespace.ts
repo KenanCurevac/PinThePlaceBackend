@@ -755,7 +755,8 @@ export type QuestionScalarFieldEnum = (typeof QuestionScalarFieldEnum)[keyof typ
 
 export const GameScalarFieldEnum = {
   id: 'id',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  currentQuestionIndex: 'currentQuestionIndex'
 } as const
 
 export type GameScalarFieldEnum = (typeof GameScalarFieldEnum)[keyof typeof GameScalarFieldEnum]

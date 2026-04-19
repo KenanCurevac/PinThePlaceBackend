@@ -25,6 +25,9 @@ model Question {
 model Game {
   id          String    @id @default(cuid())
   createdAt   DateTime  @default(now())
+
+  currentQuestionIndex Int @default(0)
+  
   gameQuestions GameQuestion[]
   guesses     Guess[]
 }
