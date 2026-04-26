@@ -49,9 +49,9 @@ model GameQuestion {
 
 model Guess {
   id          String    @id @default(cuid())
-  lat         Float
-  lng         Float 
-  distance    Float
+  lat         Float?
+  lng         Float? 
+  distance    Float?
   points      Int
 
   gameId      String

@@ -205,9 +205,9 @@ export type GuessGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 
 export type GuessGroupByOutputType = {
   id: string
-  lat: number
-  lng: number
-  distance: number
+  lat: number | null
+  lng: number | null
+  distance: number | null
   points: number
   gameId: string
   questionId: string
@@ -238,9 +238,9 @@ export type GuessWhereInput = {
   OR?: Prisma.GuessWhereInput[]
   NOT?: Prisma.GuessWhereInput | Prisma.GuessWhereInput[]
   id?: Prisma.StringFilter<"Guess"> | string
-  lat?: Prisma.FloatFilter<"Guess"> | number
-  lng?: Prisma.FloatFilter<"Guess"> | number
-  distance?: Prisma.FloatFilter<"Guess"> | number
+  lat?: Prisma.FloatNullableFilter<"Guess"> | number | null
+  lng?: Prisma.FloatNullableFilter<"Guess"> | number | null
+  distance?: Prisma.FloatNullableFilter<"Guess"> | number | null
   points?: Prisma.IntFilter<"Guess"> | number
   gameId?: Prisma.StringFilter<"Guess"> | string
   questionId?: Prisma.StringFilter<"Guess"> | string
@@ -250,9 +250,9 @@ export type GuessWhereInput = {
 
 export type GuessOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  lat?: Prisma.SortOrder
-  lng?: Prisma.SortOrder
-  distance?: Prisma.SortOrder
+  lat?: Prisma.SortOrderInput | Prisma.SortOrder
+  lng?: Prisma.SortOrderInput | Prisma.SortOrder
+  distance?: Prisma.SortOrderInput | Prisma.SortOrder
   points?: Prisma.SortOrder
   gameId?: Prisma.SortOrder
   questionId?: Prisma.SortOrder
@@ -266,9 +266,9 @@ export type GuessWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.GuessWhereInput | Prisma.GuessWhereInput[]
   OR?: Prisma.GuessWhereInput[]
   NOT?: Prisma.GuessWhereInput | Prisma.GuessWhereInput[]
-  lat?: Prisma.FloatFilter<"Guess"> | number
-  lng?: Prisma.FloatFilter<"Guess"> | number
-  distance?: Prisma.FloatFilter<"Guess"> | number
+  lat?: Prisma.FloatNullableFilter<"Guess"> | number | null
+  lng?: Prisma.FloatNullableFilter<"Guess"> | number | null
+  distance?: Prisma.FloatNullableFilter<"Guess"> | number | null
   points?: Prisma.IntFilter<"Guess"> | number
   gameId?: Prisma.StringFilter<"Guess"> | string
   questionId?: Prisma.StringFilter<"Guess"> | string
@@ -278,9 +278,9 @@ export type GuessWhereUniqueInput = Prisma.AtLeast<{
 
 export type GuessOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  lat?: Prisma.SortOrder
-  lng?: Prisma.SortOrder
-  distance?: Prisma.SortOrder
+  lat?: Prisma.SortOrderInput | Prisma.SortOrder
+  lng?: Prisma.SortOrderInput | Prisma.SortOrder
+  distance?: Prisma.SortOrderInput | Prisma.SortOrder
   points?: Prisma.SortOrder
   gameId?: Prisma.SortOrder
   questionId?: Prisma.SortOrder
@@ -296,9 +296,9 @@ export type GuessScalarWhereWithAggregatesInput = {
   OR?: Prisma.GuessScalarWhereWithAggregatesInput[]
   NOT?: Prisma.GuessScalarWhereWithAggregatesInput | Prisma.GuessScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Guess"> | string
-  lat?: Prisma.FloatWithAggregatesFilter<"Guess"> | number
-  lng?: Prisma.FloatWithAggregatesFilter<"Guess"> | number
-  distance?: Prisma.FloatWithAggregatesFilter<"Guess"> | number
+  lat?: Prisma.FloatNullableWithAggregatesFilter<"Guess"> | number | null
+  lng?: Prisma.FloatNullableWithAggregatesFilter<"Guess"> | number | null
+  distance?: Prisma.FloatNullableWithAggregatesFilter<"Guess"> | number | null
   points?: Prisma.IntWithAggregatesFilter<"Guess"> | number
   gameId?: Prisma.StringWithAggregatesFilter<"Guess"> | string
   questionId?: Prisma.StringWithAggregatesFilter<"Guess"> | string
@@ -306,9 +306,9 @@ export type GuessScalarWhereWithAggregatesInput = {
 
 export type GuessCreateInput = {
   id?: string
-  lat: number
-  lng: number
-  distance: number
+  lat?: number | null
+  lng?: number | null
+  distance?: number | null
   points: number
   game: Prisma.GameCreateNestedOneWithoutGuessesInput
   question: Prisma.QuestionCreateNestedOneWithoutGuessesInput
@@ -316,9 +316,9 @@ export type GuessCreateInput = {
 
 export type GuessUncheckedCreateInput = {
   id?: string
-  lat: number
-  lng: number
-  distance: number
+  lat?: number | null
+  lng?: number | null
+  distance?: number | null
   points: number
   gameId: string
   questionId: string
@@ -326,9 +326,9 @@ export type GuessUncheckedCreateInput = {
 
 export type GuessUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  lat?: Prisma.FloatFieldUpdateOperationsInput | number
-  lng?: Prisma.FloatFieldUpdateOperationsInput | number
-  distance?: Prisma.FloatFieldUpdateOperationsInput | number
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  distance?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   points?: Prisma.IntFieldUpdateOperationsInput | number
   game?: Prisma.GameUpdateOneRequiredWithoutGuessesNestedInput
   question?: Prisma.QuestionUpdateOneRequiredWithoutGuessesNestedInput
@@ -336,9 +336,9 @@ export type GuessUpdateInput = {
 
 export type GuessUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  lat?: Prisma.FloatFieldUpdateOperationsInput | number
-  lng?: Prisma.FloatFieldUpdateOperationsInput | number
-  distance?: Prisma.FloatFieldUpdateOperationsInput | number
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  distance?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   points?: Prisma.IntFieldUpdateOperationsInput | number
   gameId?: Prisma.StringFieldUpdateOperationsInput | string
   questionId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -346,9 +346,9 @@ export type GuessUncheckedUpdateInput = {
 
 export type GuessCreateManyInput = {
   id?: string
-  lat: number
-  lng: number
-  distance: number
+  lat?: number | null
+  lng?: number | null
+  distance?: number | null
   points: number
   gameId: string
   questionId: string
@@ -356,17 +356,17 @@ export type GuessCreateManyInput = {
 
 export type GuessUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  lat?: Prisma.FloatFieldUpdateOperationsInput | number
-  lng?: Prisma.FloatFieldUpdateOperationsInput | number
-  distance?: Prisma.FloatFieldUpdateOperationsInput | number
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  distance?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   points?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type GuessUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  lat?: Prisma.FloatFieldUpdateOperationsInput | number
-  lng?: Prisma.FloatFieldUpdateOperationsInput | number
-  distance?: Prisma.FloatFieldUpdateOperationsInput | number
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  distance?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   points?: Prisma.IntFieldUpdateOperationsInput | number
   gameId?: Prisma.StringFieldUpdateOperationsInput | string
   questionId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -515,20 +515,28 @@ export type GuessUncheckedUpdateManyWithoutGameNestedInput = {
   deleteMany?: Prisma.GuessScalarWhereInput | Prisma.GuessScalarWhereInput[]
 }
 
+export type NullableFloatFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type GuessCreateWithoutQuestionInput = {
   id?: string
-  lat: number
-  lng: number
-  distance: number
+  lat?: number | null
+  lng?: number | null
+  distance?: number | null
   points: number
   game: Prisma.GameCreateNestedOneWithoutGuessesInput
 }
 
 export type GuessUncheckedCreateWithoutQuestionInput = {
   id?: string
-  lat: number
-  lng: number
-  distance: number
+  lat?: number | null
+  lng?: number | null
+  distance?: number | null
   points: number
   gameId: string
 }
@@ -564,9 +572,9 @@ export type GuessScalarWhereInput = {
   OR?: Prisma.GuessScalarWhereInput[]
   NOT?: Prisma.GuessScalarWhereInput | Prisma.GuessScalarWhereInput[]
   id?: Prisma.StringFilter<"Guess"> | string
-  lat?: Prisma.FloatFilter<"Guess"> | number
-  lng?: Prisma.FloatFilter<"Guess"> | number
-  distance?: Prisma.FloatFilter<"Guess"> | number
+  lat?: Prisma.FloatNullableFilter<"Guess"> | number | null
+  lng?: Prisma.FloatNullableFilter<"Guess"> | number | null
+  distance?: Prisma.FloatNullableFilter<"Guess"> | number | null
   points?: Prisma.IntFilter<"Guess"> | number
   gameId?: Prisma.StringFilter<"Guess"> | string
   questionId?: Prisma.StringFilter<"Guess"> | string
@@ -574,18 +582,18 @@ export type GuessScalarWhereInput = {
 
 export type GuessCreateWithoutGameInput = {
   id?: string
-  lat: number
-  lng: number
-  distance: number
+  lat?: number | null
+  lng?: number | null
+  distance?: number | null
   points: number
   question: Prisma.QuestionCreateNestedOneWithoutGuessesInput
 }
 
 export type GuessUncheckedCreateWithoutGameInput = {
   id?: string
-  lat: number
-  lng: number
-  distance: number
+  lat?: number | null
+  lng?: number | null
+  distance?: number | null
   points: number
   questionId: string
 }
@@ -618,72 +626,72 @@ export type GuessUpdateManyWithWhereWithoutGameInput = {
 
 export type GuessCreateManyQuestionInput = {
   id?: string
-  lat: number
-  lng: number
-  distance: number
+  lat?: number | null
+  lng?: number | null
+  distance?: number | null
   points: number
   gameId: string
 }
 
 export type GuessUpdateWithoutQuestionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  lat?: Prisma.FloatFieldUpdateOperationsInput | number
-  lng?: Prisma.FloatFieldUpdateOperationsInput | number
-  distance?: Prisma.FloatFieldUpdateOperationsInput | number
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  distance?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   points?: Prisma.IntFieldUpdateOperationsInput | number
   game?: Prisma.GameUpdateOneRequiredWithoutGuessesNestedInput
 }
 
 export type GuessUncheckedUpdateWithoutQuestionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  lat?: Prisma.FloatFieldUpdateOperationsInput | number
-  lng?: Prisma.FloatFieldUpdateOperationsInput | number
-  distance?: Prisma.FloatFieldUpdateOperationsInput | number
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  distance?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   points?: Prisma.IntFieldUpdateOperationsInput | number
   gameId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type GuessUncheckedUpdateManyWithoutQuestionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  lat?: Prisma.FloatFieldUpdateOperationsInput | number
-  lng?: Prisma.FloatFieldUpdateOperationsInput | number
-  distance?: Prisma.FloatFieldUpdateOperationsInput | number
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  distance?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   points?: Prisma.IntFieldUpdateOperationsInput | number
   gameId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type GuessCreateManyGameInput = {
   id?: string
-  lat: number
-  lng: number
-  distance: number
+  lat?: number | null
+  lng?: number | null
+  distance?: number | null
   points: number
   questionId: string
 }
 
 export type GuessUpdateWithoutGameInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  lat?: Prisma.FloatFieldUpdateOperationsInput | number
-  lng?: Prisma.FloatFieldUpdateOperationsInput | number
-  distance?: Prisma.FloatFieldUpdateOperationsInput | number
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  distance?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   points?: Prisma.IntFieldUpdateOperationsInput | number
   question?: Prisma.QuestionUpdateOneRequiredWithoutGuessesNestedInput
 }
 
 export type GuessUncheckedUpdateWithoutGameInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  lat?: Prisma.FloatFieldUpdateOperationsInput | number
-  lng?: Prisma.FloatFieldUpdateOperationsInput | number
-  distance?: Prisma.FloatFieldUpdateOperationsInput | number
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  distance?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   points?: Prisma.IntFieldUpdateOperationsInput | number
   questionId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type GuessUncheckedUpdateManyWithoutGameInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  lat?: Prisma.FloatFieldUpdateOperationsInput | number
-  lng?: Prisma.FloatFieldUpdateOperationsInput | number
-  distance?: Prisma.FloatFieldUpdateOperationsInput | number
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  distance?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   points?: Prisma.IntFieldUpdateOperationsInput | number
   questionId?: Prisma.StringFieldUpdateOperationsInput | string
 }
@@ -758,9 +766,9 @@ export type $GuessPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    lat: number
-    lng: number
-    distance: number
+    lat: number | null
+    lng: number | null
+    distance: number | null
     points: number
     gameId: string
     questionId: string
